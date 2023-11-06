@@ -1,0 +1,227 @@
+kOwOnsole
+
+Department : M2007U-L2016-A2017-S2017-CS
+Created by : XR_XharpRazor
+version    : 20231106-0537
+
+
+---- ---- ---- ---- Console Commands
+
+
+
+kon:chunk <word1> <word2> <word3>
+
+    identifies the line you have entered into chunks and prints them,
+    mostly useless
+
+
+
+kon:clean
+
+    clears the console screen
+
+
+
+kon:close
+
+    closes kOwOnsole and go back to your normal console
+
+
+
+---- ---- ---- ---- Directory Commands
+
+
+
+dir:goto <directoryName>
+
+    changes your current directory to the given directory
+    if the directory cannot be found, your current directory will stay the same
+
+    EG: say your current path is "D:/users/Nom", 
+    and inside that directory you have a folder called "Deskbottom",
+    then typing "dir:goto Deskbottom" 
+    this will change your directory from 
+    "D:/users/Nom" to "D:/users/Nom/Deskbottom"
+
+
+
+dir:goto <directoryName>/.../<directoryName>
+
+    changes your current directory segment by segment to the given directory.
+    if a segment of the given path cannot be found, 
+    that segment will be ignored, and your current directory path will stay the same.
+
+    in a directory chain, "." will cause nothing to happen,
+    and ".." will move you from your current directory to the directory which is one layer above 
+
+    EG : "dir:goto Deskbottom/Fork01/Fork02/Fork03/../Apple" means the following:
+    if you can find "Deskbottom", then go in there, else, do nothing;
+    if you can find "Fork01", then go in there, else, do nothing;
+    if you can find "Fork02", then go in there, else, do nothing;
+    if you can find "Fork03", then go in there, else, do nothing;
+    if you can go one layer up, then go in there, else, do nothing;
+    if you can find "Apple", then go in there, else, do nothing;
+
+
+
+dir:make <folderName>
+
+    creates a folder with the name <folderName> in the current directory
+
+
+
+dir:list <[Optional] searchString>
+
+    if no search string given, kOwOnsole will list all the files in the current directory you are in.
+    if a search string is given, then kOwOnsole will list all the files such that their name contains the given search string.
+
+    EG: say in the directory we have the following files:
+    data001.txt
+    data002.txt
+    data003.txt
+    data004.txt
+    flower.png
+    when we entered "dir:list data",
+    "data001.txt", "data002.txt", "data003.txt", "data004.txt" will be listed because these names contain the given string "data"
+    in this case, "flower.png" will not be listed because the given string "data" cannot be found in its name.
+
+
+
+dir:peek <relative directory> <[Optional] search string>
+
+    a modified version of "dir:list".
+    this command is the combination of the following commands:
+        - goto a folder (dir:goto)
+        - list what is in that folder (dir:list)
+        - then come back (dir:goto)
+
+    with this, when we want to "peek" at the concents of a folder, 
+    we don't need to go inside the folder and list them, 
+    we just need to peek them as long as we know the relative address
+
+
+
+dir:where
+
+    prints the absolute path of your current directory.
+
+
+
+---- ---- ---- ---- File Commands
+
+
+
+file:make <fileName>
+
+    if there is no file in the current directory with the file name <fileName>.
+    kOwOnsole will make a file in that directory with that fileName.
+
+    EG: file:make apple.dat
+
+
+
+file:copy <source file name / relative source file path> <destination file name / destination file path>
+
+    copies a file from the given source file into a destination directory or a destination file
+    if the destination already has other file that has the same name as the destination file,
+    kOwOnsole will prompt the user to : cancel copy / change the destination file name / overwritting the exsisting file.
+
+    EG: file:copy folder1024/AppleKofi.txt folder2048
+
+
+
+file:print <relative file path> <[Optional] printing mode> <[Optional] spacing string>
+
+    prints a file onto the screen.
+    if <[Optional] printing mode> is left empty, then the file will be printed in normal strings, human readable stuff (unless you have non-human-readable stuff inside)
+    if <[Optional] printing mode> is "ascii::dec", then each charracter in the file will be printed as ascii numbers (base10)
+    if <[Optional] printing mode> is "ascii::hex", then each charrecter will be printed as Base16 ascii numbers
+
+    for both "ascii::dec" and "ascii::hex", if <[Optional] spacing string> is left empty,
+    kOwOnsole will ask how many spaces you want in your space string.
+
+
+
+
+
+---- ---- ---- ---- Tool Commands
+
+
+
+
+
+tool:rand <iteration> <Num0> <Num1>
+
+    a random number generator,
+    a list of random number picked between <Num0> and <Num1> will be printed
+
+    EG: having "kon::toy rand 10 1 50" will give you 10 random integers between 1 and 50
+
+
+
+tool:dice <dice list>
+
+    a dice simulator, useful for DnD campaigns.
+    a dice list is a list of interger separated by commas
+    such that every integer represents the highest number of a dice can roll
+
+    EG : having "kon::toy dice 6,10,10,20,20,20 ", 
+    kOwOnsole will roll a D6, 2 D10s and 3 D20s.
+
+
+
+tool:calc <"+" xor "*"> <number list>
+
+    a mini calculator to calculate the sum or product of the given number list
+
+    EG : having "tool:calc + 1,2,3,4", kOwOnsole will return with 10, which is 1+2+3+4
+    EG : habing "tool:calc * 1,2,3,4", kOwOnsole will return with 24, which is 1*2*3*4
+
+
+
+tool: calc <Num0> <"-" xor "/" xor "^" xor "rt" xor "!"> <Num1>
+
+    based on different symbols, kOwOnsole will return different answers.
+    "-"  : Num0 - Num1
+    "/"  : Num0 / Num1
+    "^"  : Num0 ^ Num1
+    "rt" : (Num0)root of Num1
+    "!"  : Num0 !
+
+    EG: 
+    "tool:calc 8 - 4"   : 8 minus 4, 4
+    "tool:calc 8 / 4"   : 8 divided by 4, 2
+    "tool:calc 2 ^ 3"   : 2 to the power of 3, 8
+    "tool:calc 3 rt 27" : cube(3) root of 27, 3
+    "tool:calc 5 !"     : 5 factorial, 120
+
+
+
+---- ---- ---- ----
+
+
+
+when you are used to kOwOnsole, every command can be executed by using shorthands or xort hands:
+
+| original command | short hand | xort hands |
+|------------------|------------|------------|
+|                  |            |            |
+| kon:chunk        | kn:ck      | kk         |
+| kon:clean        | kx:cn      | kn         |
+| kon:close        | kn:xx      | kx         |
+| kon:help         | kn:hp      | kh         |
+|                  |            |            |
+| dir:goto         | dr:gt      | dg         |
+| dir:make         | dr:mk      | dm         |
+| dir:list         | dr:ls      | dl         |
+| dir:peek         | dr:pk      | dp         |
+| dir:where        | dr:wh      | dw         |
+|                  |            |            |
+| file:make        | fl:mk      | fm         |
+| file:copy        | fl:cp      | fc         |
+| file:print       | fl:pr      | fp         |
+|                  |            |            |
+| tool:rand        | tl:rd      | tr         |
+| tool:dice        | tl:dc      | td         |
+| tool:calc        | tl:cl      | tc         |
+|                  |            |            |
