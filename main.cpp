@@ -96,7 +96,7 @@ int main ()
         //short hand translations
 
         if     (USER_CommandLine_Chunk0 == "kn:ck" || USER_CommandLine_Chunk0 == "kk"){USER_CommandLine_Chunk0 = "kon:chunk";}
-        else if(USER_CommandLine_Chunk0 == "kn:cn" || USER_CommandLine_Chunk0 == "kc"){USER_CommandLine_Chunk0 = "kon:clean";}
+        else if(USER_CommandLine_Chunk0 == "kn:cn" || USER_CommandLine_Chunk0 == "kn"){USER_CommandLine_Chunk0 = "kon:clean";}
         else if(USER_CommandLine_Chunk0 == "kn:hp" || USER_CommandLine_Chunk0 == "kh"){USER_CommandLine_Chunk0 = "kon:help";}
         else if(USER_CommandLine_Chunk0 == "dr:mk" || USER_CommandLine_Chunk0 == "dm"){USER_CommandLine_Chunk0 = "dir:make";}
         else if(USER_CommandLine_Chunk0 == "dr:gt" || USER_CommandLine_Chunk0 == "dg"){USER_CommandLine_Chunk0 = "dir:goto";}
@@ -967,6 +967,7 @@ int main ()
             else if(
                 USER_CommandLine_Chunk2 == "-" || 
                 USER_CommandLine_Chunk2 == "/" ||
+                USER_CommandLine_Chunk2 == "%" ||
                 USER_CommandLine_Chunk2 == "^" ||
                 USER_CommandLine_Chunk2 == "rt" ||
                 USER_CommandLine_Chunk2 == "!"
@@ -995,6 +996,13 @@ int main ()
                     {
                         Total = Num0 / Num1;
                     }
+                    else if(USER_CommandLine_Chunk2 == "%")
+                    {
+                        int Num0int = (int)Num0;
+                        int Num1int = (int)Num1;
+
+                        Total = Num0int % Num1int;
+                    }
                     else if(USER_CommandLine_Chunk2 == "^")
                     {
                         Total = pow(Num0,Num1);
@@ -1020,7 +1028,62 @@ int main ()
                     cout << KONS_ConsoleName_Failed << "unable to interpret number or operator" << endl;
                 }
             }
-            
+            else if(
+                USER_CommandLine_Chunk1 == "fac" ||
+                USER_CommandLine_Chunk1 == "prime"
+            )
+            {
+                long double Num0;
+
+                if(FOwO_string_isNumber(USER_CommandLine_Chunk2))
+                {
+                    Bwuffer.clear();
+                    Bwuffer << USER_CommandLine_Chunk2;
+                    Bwuffer >> Num0;
+                    Bwuffer.clear();
+
+                    if(USER_CommandLine_Chunk1 == "fac")
+                    {
+                        //get all factors of given number
+
+                        int Num0Int = (int)Num0;
+
+                        for(int i = 1; i <= pow(Num0,0.5); i++ )
+                        {
+                            if( Num0Int % i == 0 )
+                            {
+                                cout << KONS_ConsoleName_Report << " " << i << " , " << Num0Int / i << endl;
+                            }
+                        }
+                    }
+                    else if (USER_CommandLine_Chunk1 == "prime")
+                    {
+
+                        int Num0Int = (int)Num0;
+                        int CurrentPrime = 2;
+                        cout << KONS_ConsoleName_Report << " ";
+
+                        while(Num0Int != 1)
+                        {
+                            if(Num0Int % CurrentPrime == 0)
+                            {
+                                cout << CurrentPrime << "  ";
+                                Num0Int = Num0Int / CurrentPrime;
+                            }
+                            else
+                            {
+                                CurrentPrime++;
+                            }
+                        }
+
+                        cout << endl;
+                    }
+
+                    
+                }
+
+
+            }
         }
 
         cout << endl;

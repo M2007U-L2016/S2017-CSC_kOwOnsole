@@ -184,6 +184,7 @@ tool: calc <Num0> <"-" xor "/" xor "^" xor "rt" xor "!"> <Num1>
     based on different symbols, kOwOnsole will return different answers.
     "-"  : Num0 - Num1
     "/"  : Num0 / Num1
+    "%"  : Num0 mod(Num1) OR remainder of Num0 / Num1
     "^"  : Num0 ^ Num1
     "rt" : (Num0)root of Num1
     "!"  : Num0 !
@@ -191,9 +192,24 @@ tool: calc <Num0> <"-" xor "/" xor "^" xor "rt" xor "!"> <Num1>
     EG: 
     "tool:calc 8 - 4"   : 8 minus 4, 4
     "tool:calc 8 / 4"   : 8 divided by 4, 2
+    "tool:calc 12 % 5 " : 12 mod5, 2
     "tool:calc 2 ^ 3"   : 2 to the power of 3, 8
     "tool:calc 3 rt 27" : cube(3) root of 27, 3
     "tool:calc 5 !"     : 5 factorial, 120
+
+
+
+tool:calc <"fac" xor "prime"> <Num0>
+
+    based on different functions, kOwOnsole will print out different answers.
+    "fac"   : print all the factors of Num0
+    "prime" : print the prime structure of Num0
+
+    EG:
+    "tool:calc fac 12"    : prints the factors of 12, which are 1,2,3,4,6,12
+    "tool:calc prime 300" : prints the prime structure of 300, which is 2,2,3,5,5
+
+
 
 
 
